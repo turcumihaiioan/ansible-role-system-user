@@ -1,0 +1,34 @@
+---
+galaxy_info:
+  role_name: system_user_management
+  author: turcumihaiioan
+  description: role for managing users, groups, authorized keys and sudoers file
+
+  license: GPL-3.0-only
+
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - authorized
+    - group
+    - key
+    - ssh
+    - sudo
+    - system
+    - user
+
+dependencies: []
