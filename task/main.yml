@@ -1,0 +1,22 @@
+---
+- name: running system_user_management tasks
+  block:
+    - name: creating group
+      ansible.builtin.group:
+        gid: "{{ item['value']['gid'] | default(omit) }}"
+        local: "{{ item['value']['local'] | default(omit) }}"
+        name: "{{ item['value']['name'] }}"
+        non_unique: "{{ item['value']['local'] | default(omit) }}"
+        state: present
+        system: "{{ item['value']['local'] | default(omit) }}"
+      loop: "{{ system_user_management['group'] | dict2items }}"
+      loop_control:
+        label: "{{ item['key'] }}"
+      when:
+        - item['value']['name'] is defined
+        - item['value']['state'] is defined and
+          item['value']['state'] == "present" or
+          item['value']['state'] is undefined
+        - system_user_management['group'] is defined
+  when:
+    - system_user_management is defined
