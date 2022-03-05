@@ -18,5 +18,18 @@
           item['value']['state'] == "present" or
           item['value']['state'] is undefined
         - system_user_management['group'] is defined
+
+    - name: removing group
+      ansible.builtin.group:
+        name: "{{ item['value']['name'] }}"
+        state: absent
+      loop: "{{ system_user_management['group'] | dict2items }}"
+      loop_control:
+        label: "{{ item['key'] }}"
+      when:
+        - item['value']['name'] is defined
+        - item['value']['state'] is defined
+        - item['value']['state'] == "absent"
+        - system_user_management['group'] is defined
   when:
     - system_user_management is defined
