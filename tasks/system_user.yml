@@ -1,0 +1,53 @@
+---
+- name: "{{ system_user_item['key'] }} : creating user"
+  ansible.builtin.user:
+    append: "{{ system_user_item['value']['append'] | default(omit) }}"
+    authorization: "{{ system_user_item['value']['authorization'] | default(omit) }}"
+    comment: "{{ system_user_item['value']['comment'] | default(omit) }}"
+    create_home: "{{ system_user_item['value']['create_home'] | default(omit) }}"
+    expires: "{{ system_user_item['value']['expires'] | default(omit) }}"
+    generate_ssh_key: "{{ system_user_item['value']['generate_ssh_key'] | default(omit) }}"
+    group: "{{ system_user_item['value']['group'] | default(omit) }}"
+    groups: "{{ system_user_item['value']['groups'] | default(omit) }}"
+    hidden: "{{ system_user_item['value']['hidden'] | default(omit) }}"
+    home: "{{ system_user_item['value']['home'] | default(omit) }}"
+    local: "{{ system_user_item['value']['local'] | default(omit) }}"
+    login_class: "{{ system_user_item['value']['login_class'] | default(omit) }}"
+    move_home: "{{ system_user_item['value']['move_home'] | default(omit) }}"
+    name: "{{ system_user_item['value']['name'] }}"
+    non_unique: "{{ system_user_item['value']['non_unique'] | default(omit) }}"
+    password: "{{ system_user_item['value']['password'] | default(omit) }}"
+    password_expire_max: "{{ system_user_item['value']['password_expire_max'] | default(omit) }}"
+    password_expire_min: "{{ system_user_item['value']['password_expire_min'] | default(omit) }}"
+    password_lock: "{{ system_user_item['value']['password_lock'] | default(omit) }}"
+    profile: "{{ system_user_item['value']['profile'] | default(omit) }}"
+    role: "{{ system_user_item['value']['role'] | default(omit) }}"
+    seuser: "{{ system_user_item['value']['seuser'] | default(omit) }}"
+    shell: "{{ system_user_item['value']['shell'] | default(omit) }}"
+    skeleton: "{{ system_user_item['value']['skeleton'] | default(omit) }}"
+    ssh_key_bits: "{{ system_user_item['value']['ssh_key_bits'] | default(omit) }}"
+    ssh_key_comment: "{{ system_user_item['value']['ssh_key_comment'] | default(omit) }}"
+    ssh_key_file: "{{ system_user_item['value']['ssh_key_file'] | default(omit) }}"
+    ssh_key_passphrase: "{{ system_user_item['value']['ssh_key_passphrase'] | default(omit) }}"
+    ssh_key_type: "{{ system_user_item['value']['ssh_key_type'] | default(omit) }}"
+    state: present
+    system: "{{ system_user_item['value']['system'] | default(omit) }}"
+    uid: "{{ system_user_item['value']['uid'] | default(omit) }}"
+    umask: "{{ system_user_item['value']['umask'] | default(omit) }}"
+    update_password: "{{ system_user_item['value']['update_password'] | default(omit) }}"
+  when:
+    - system_user_item['value']['name'] is defined
+    - system_user_item['value']['state'] is defined and
+      system_user_item['value']['state'] == "present" or
+      system_user_item['value']['state'] is undefined
+
+- name: "{{ system_user_item['key'] }} : removing user"
+  ansible.builtin.user:
+    force: "{{ system_user_item['value']['force'] | default(omit) }}"
+    name: "{{ system_user_item['value']['name'] }}"
+    remove: "{{ system_user_item['value']['remove'] | default(omit) }}"
+    state: absent
+  when:
+    - system_user_item['value']['name'] is defined
+    - system_user_item['value']['state'] is defined
+    - system_user_item['value']['state'] == "absent"
