@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: system_user_management
+  role_name: system_user
   author: turcumihaiioan
   description: role for managing users, groups, authorized keys and sudoers file
 
